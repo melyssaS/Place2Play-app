@@ -4,6 +4,7 @@ import 'package:place_2_play/constans.dart';
 class TextFieldContainer extends StatelessWidget {
   const TextFieldContainer(
       {super.key,
+      this.controller,
       required this.text,
       required this.inputColor,
       required this.textColor,
@@ -12,6 +13,7 @@ class TextFieldContainer extends StatelessWidget {
   final String text;
   final Color inputColor, textColor;
   final IconData icon;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class TextFieldContainer extends StatelessWidget {
           color: inputColor.withOpacity(0.1),
           borderRadius: BorderRadius.circular(29)),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
             icon: Icon(
               icon,

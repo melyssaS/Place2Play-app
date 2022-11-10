@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:place_2_play/components/my_botton_nav_bar.dart';
+import 'package:place_2_play/ui/components/my_botton_nav_bar.dart';
 import 'package:place_2_play/constans.dart';
-import 'package:place_2_play/screens/login/components/body.dart';
+import 'package:place_2_play/ui/screens/event/components/body.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class EventScreen extends StatelessWidget {
+  const EventScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +12,6 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: kPrimaryColor,
-        leading: IconButton(
-          icon: const Icon(Icons.search),
-          onPressed: () {},
-        ),
       ),
       body: Body(),
       bottomNavigationBar: const MyBottomNavBar(),
