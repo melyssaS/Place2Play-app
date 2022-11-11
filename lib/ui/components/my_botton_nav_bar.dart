@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:place_2_play/constans.dart';
 import 'package:place_2_play/ui/screens/event/events_screen.dart';
+import 'package:place_2_play/ui/screens/form/form_screen.dart';
 import 'package:place_2_play/ui/screens/home/home_screen.dart';
 
 class MyBottomNavBar extends StatelessWidget {
@@ -44,9 +45,8 @@ class MyBottomNavBar extends StatelessWidget {
             onPressed: () => Get.to(() => const HomeScreen()),
           ),
           IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
+              icon: const Icon(Icons.add),
+              onPressed: () => Get.to(() => const FormScreen())),
           IconButton(
             icon: const Icon(Icons.calendar_month),
             onPressed: () => Get.to(() => const EventScreen()),

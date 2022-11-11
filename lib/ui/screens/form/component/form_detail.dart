@@ -15,43 +15,47 @@ class FormDetail extends StatefulWidget {
 class _FormDetailState extends State<FormDetail> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     EventUseCase event = Get.find();
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     TextEditingController title = TextEditingController();
     TextEditingController description = TextEditingController();
     TextEditingController price = TextEditingController();
-    return Form(
-        key: _formKey,
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          InputBox(
-            textLabel: "Titulo",
-            maxlength: 20,
-            controller: title,
-          ),
-          InputBox(
-            textLabel: "Descripción",
-            maxlength: 20,
-            controller: description,
-          ),
-          InputBox(
-            textLabel: "Precio",
-            maxlength: 20,
-            controller: price,
-          ),
-          RoundedButton(
-              text: "Añadir",
-              press: () {
-                event.addEvent(Event(
-                    description: description.text,
-                    title: title.text,
-                    start: DateTime.now(),
-                    end: DateTime.now(),
-                    price: double.parse(price.text),
-                    category: UserCategory.created));
-              },
-              color: kPrimaryColor,
-              textColor: kTextColor),
-        ]));
+    return Container(
+      width: size.width,
+      child: Form(
+          key: _formKey,
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            InputBox(
+              textLabel: "Titulo",
+              maxlength: 20,
+              controller: title,
+            ),
+            InputBox(
+              textLabel: "Descripción",
+              maxlength: 20,
+              controller: description,
+            ),
+            InputBox(
+              textLabel: "Precio",
+              maxlength: 20,
+              controller: price,
+            ),
+            RoundedButton(
+                text: "Añadir",
+                press: () {
+                  event.addEvent(Event(
+                      description: description.text,
+                      title: title.text,
+                      start: DateTime.now(),
+                      end: DateTime.now(),
+                      price: double.parse(price.text),
+                      category: UserCategory.created));
+                },
+                color: kPrimaryColor,
+                textColor: kTextColor),
+          ])),
+    );
   }
 }
 
