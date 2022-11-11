@@ -6,16 +6,16 @@ import 'package:place_2_play/ui/components/already_have_an_account_acheck.dart';
 import 'package:place_2_play/ui/components/rounded_button.dart';
 import 'package:place_2_play/ui/components/text_field_container.dart';
 import 'package:place_2_play/constans.dart';
-import 'package:place_2_play/ui/screens/signup/signup.dart';
+import 'package:place_2_play/ui/screens/login/login_screen.dart';
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({super.key});
+class SignUpForm extends StatefulWidget {
+  const SignUpForm({super.key});
 
   @override
-  State<LoginForm> createState() => _LoginFormState();
+  State<SignUpForm> createState() => _SignUpFormState();
 }
 
-class _LoginFormState extends State<LoginForm> {
+class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     Authentication controller = Get.find();
@@ -55,29 +55,30 @@ class _LoginFormState extends State<LoginForm> {
           ),
           const SizedBox(height: kDefaultPadding),
           RoundedButton(
-              text: "Login",
+              text: "Sign Up",
               press: () {
                 // print(
                 //     "El email es ${email.text} y el password: ${password.text}");
                 // if (_formKey.currentState!.validate()) {
                 //   print("entro");
-                login(controller, authentication, email.text, password.text);
+                signup(controller, authentication, email.text, password.text);
                 // }
               },
               color: kPrimaryColor,
               textColor: kTextColor),
           const SizedBox(height: kDefaultPadding),
           AlreadyHaveAnAccountCheck(
-            press: () => Get.to(() => const SingUpScreen()),
+            login: false,
+            press: () => Get.to(() => const LoginScreen()),
           ),
         ],
       ),
     );
   }
 
-  void login(Authentication controller, AuthenticationController authentication,
-      String email, String password) {
-    controller.login(email, password);
-    authentication.login(email, password);
+  void signup(Authentication controller,
+      AuthenticationController authentication, String email, String password) {
+    controller.signup(email, password);
+    authentication.signup(email, password);
   }
 }

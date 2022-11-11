@@ -4,10 +4,13 @@ import 'package:loggy/loggy.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:place_2_play/constans.dart';
+import 'package:place_2_play/domain/repositories/event_repository.dart';
+import 'package:place_2_play/domain/use_case/event.dart';
 import 'package:place_2_play/ui/screens/login/login_screen.dart';
 import 'package:place_2_play/domain/repositories/user_repository.dart';
 import 'package:place_2_play/domain/use_case/authentication.dart';
 import 'package:place_2_play/controllers/user_controller.dart';
+import 'package:place_2_play/ui/screens/form/form_screen.dart';
 // import 'package:place_2_play/ui/screens/details/detail_screen.dart';
 // import 'package:place_2_play/ui/screens/event/events_screen.dart';
 // import 'package:place_2_play/ui/screens/home/home_screen.dart';
@@ -18,6 +21,9 @@ class InitialBinding implements Bindings {
     Get.lazyPut(() => AuthenticationController(), fenix: true);
     Get.lazyPut(() => UserRepository(), fenix: true);
     Get.lazyPut(() => Authentication(), fenix: true);
+
+    Get.lazyPut(() => EventRepository(), fenix: true);
+    Get.lazyPut(() => EventUseCase(), fenix: true);
   }
 }
 
@@ -48,7 +54,7 @@ class MyApp extends StatelessWidget {
         textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const LoginScreen(),
+      home: const FormScreen(),
     );
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:place_2_play/constans.dart';
+import 'package:place_2_play/ui/screens/details/detail_screen.dart';
 
 class RecomendsEvents extends StatelessWidget {
   const RecomendsEvents({
@@ -56,77 +58,80 @@ class RecomendEventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      margin: const EdgeInsets.only(
-        left: kDefaultPadding,
-        top: kDefaultPadding,
-      ),
-      width: size.width * 0.8,
-      height: 300,
-      child: Column(
-        children: <Widget>[
-          Container(
-            width: size.width * 0.8,
-            height: 180,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              ),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(image),
-              ),
-            ),
-          ),
-          GestureDetector(
-            onTap: press(),
-            child: Container(
-              padding: EdgeInsets.all(kDefaultPadding / 2),
+    return GestureDetector(
+      onTap: () => Get.to(() => const DetailScreen()),
+      child: Container(
+        margin: const EdgeInsets.only(
+          left: kDefaultPadding,
+          top: kDefaultPadding,
+        ),
+        width: size.width * 0.8,
+        height: 300,
+        child: Column(
+          children: <Widget>[
+            Container(
+              width: size.width * 0.8,
+              height: 180,
               decoration: BoxDecoration(
-                color: Colors.white,
                 borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 10),
-                    blurRadius: 50,
-                    color: kPrimaryColor.withOpacity(0.23),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                            text: "$title\n".toUpperCase(),
-                            style: Theme.of(context).textTheme.button),
-                        TextSpan(
-                          text: "$country".toUpperCase(),
-                          style: TextStyle(
-                            color: kPrimaryColor.withOpacity(0.5),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Spacer(),
-                  Text(
-                    '$hora',
-                    style: Theme.of(context)
-                        .textTheme
-                        .button
-                        ?.copyWith(color: kPrimaryColor),
-                  )
-                ],
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(image),
+                ),
               ),
             ),
-          )
-        ],
+            GestureDetector(
+              onTap: press(),
+              child: Container(
+                padding: EdgeInsets.all(kDefaultPadding / 2),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 10),
+                      blurRadius: 50,
+                      color: kPrimaryColor.withOpacity(0.23),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: <Widget>[
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                              text: "$title\n".toUpperCase(),
+                              style: Theme.of(context).textTheme.button),
+                          TextSpan(
+                            text: "$country".toUpperCase(),
+                            style: TextStyle(
+                              color: kPrimaryColor.withOpacity(0.5),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Spacer(),
+                    Text(
+                      '$hora',
+                      style: Theme.of(context)
+                          .textTheme
+                          .button
+                          ?.copyWith(color: kPrimaryColor),
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -42,6 +42,7 @@ class UserRepository {
   }
 
   logout() async {
+    await remoteDataSource.logout();
     await userLocalSharedPrefs.logout();
   }
 

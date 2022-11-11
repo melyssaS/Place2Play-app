@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:place_2_play/constans.dart';
 
 class DescriptionEvent extends StatelessWidget {
-  const DescriptionEvent({super.key});
+  const DescriptionEvent({super.key, required this.description});
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +20,10 @@ class DescriptionEvent extends StatelessWidget {
             )
           ],
         ),
-        const Description(
-          description:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet vulputate lorem. Quisque lacinia nulla at sapien lobortis, in ornare magna pharetra",
+        Description(
+          description: description != null
+              ? description
+              : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet vulputate lorem. Quisque lacinia nulla at sapien lobortis, in ornare magna pharetra",
         )
       ],
     );

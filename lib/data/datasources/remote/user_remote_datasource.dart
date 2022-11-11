@@ -1,7 +1,9 @@
 import 'dart:collection';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:place_2_play/constans.dart';
 import 'package:place_2_play/ui/screens/login/login_screen.dart';
 import 'package:place_2_play/ui/screens/home/home_screen.dart';
 //import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,13 +19,16 @@ class UserRemoteDataSource {
       return Future.value();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        Get.snackbar("Information", "User not found!");
+        Get.snackbar("Information", "User not found!",
+            icon: Icon(Icons.warning), backgroundColor: kPrimaryColor);
         return Future.error("User not found");
       } else if (e.code == 'wrong-password') {
-        Get.snackbar("Information", "Wrong password!");
+        Get.snackbar("Information", "Wrong password!",
+            icon: Icon(Icons.warning), backgroundColor: kPrimaryColor);
         return Future.error("Wrong password");
       } else {
-        Get.snackbar("Information", "Not valid email!");
+        Get.snackbar("Information", "Not valid email!",
+            icon: Icon(Icons.warning), backgroundColor: kPrimaryColor);
       }
     }
   }
@@ -47,15 +52,19 @@ class UserRemoteDataSource {
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      Get.to(() => const LoginScreen());
+      Get.to(() => const HomeScreen());
 
       await addUser(email, password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        Get.snackbar("Information", "The password provided is too weak.");
-        return Future.error('The password provided is too weak.');
+        Get.snackbar("Information", "The password provided is too weak.",
+            icon: Icon(Icons.warning), backgroundColor: kPrimaryColor);
+        return Future.error(
+          'The password provided is too weak.',
+        );
       } else if (e.code == 'email-already-in-use') {
-        Get.snackbar("Information", "User already exist!");
+        Get.snackbar("Information", "User already exist!",
+            icon: Icon(Icons.warning), backgroundColor: kPrimaryColor);
         return Future.error('The account already exists for that email.');
       }
     }
@@ -65,6 +74,7 @@ class UserRemoteDataSource {
   logout() async {
     try {
       await FirebaseAuth.instance.signOut();
+      Get.to(() => const LoginScreen());
     } catch (e) {
       return Future.error("Logout error");
     }

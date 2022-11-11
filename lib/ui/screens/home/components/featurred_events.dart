@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:place_2_play/constans.dart';
 import 'package:place_2_play/main.dart';
+import 'package:place_2_play/ui/screens/details/detail_screen.dart';
 
 class FeaturedEvents extends StatelessWidget {
   const FeaturedEvents({
@@ -58,7 +60,7 @@ class FeatureEventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: press(),
+      onTap: () => Get.to(() => const DetailScreen()),
       child: Container(
         margin: const EdgeInsets.only(
           top: kDefaultPadding / 2,
