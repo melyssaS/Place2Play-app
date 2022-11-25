@@ -60,7 +60,7 @@ class FeatureEventCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () => Get.to(() => const DetailScreen()),
+      onTap: () => Get.snackbar('Informacion', 'Nuevos eventos'),
       child: Container(
         margin: const EdgeInsets.only(
           top: kDefaultPadding / 2,

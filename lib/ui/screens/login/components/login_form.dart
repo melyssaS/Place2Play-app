@@ -20,12 +20,12 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     Authentication controller = Get.find();
     AuthenticationController authentication = Get.find();
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     TextEditingController email = TextEditingController();
     TextEditingController password = TextEditingController();
 
     return Form(
-      key: _formKey,
+      key: formKey,
       child: Column(
         children: [
           Container(
@@ -44,6 +44,8 @@ class _LoginFormState extends State<LoginForm> {
             textColor: kTextColor,
             icon: Icons.person,
             controller: email,
+            keyType: TextInputType.emailAddress,
+            obscureText: false,
           ),
           const SizedBox(height: kDefaultPadding),
           TextFieldContainer(
@@ -52,6 +54,8 @@ class _LoginFormState extends State<LoginForm> {
             textColor: kTextColor,
             icon: Icons.lock,
             controller: password,
+            keyType: TextInputType.visiblePassword,
+            obscureText: true,
           ),
           const SizedBox(height: kDefaultPadding),
           RoundedButton(
@@ -61,7 +65,9 @@ class _LoginFormState extends State<LoginForm> {
                 //     "El email es ${email.text} y el password: ${password.text}");
                 // if (_formKey.currentState!.validate()) {
                 //   print("entro");
-                login(controller, authentication, email.text, password.text);
+                if (formKey.currentState!.validate()) {
+                  login(controller, authentication, email.text, password.text);
+                }
                 // }
               },
               color: kPrimaryColor,
