@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:place_2_play/constans.dart';
 import 'package:place_2_play/ui/screens/event/events_screen.dart';
+import 'package:place_2_play/ui/screens/favorites/favorites_screen.dart';
 import 'package:place_2_play/ui/screens/form/form_screen.dart';
 import 'package:place_2_play/ui/screens/home/home_screen.dart';
+import 'package:place_2_play/ui/screens/map/map_screen.dart';
 
 class MyBottomNavBar extends StatelessWidget {
   const MyBottomNavBar({
@@ -23,9 +25,9 @@ class MyBottomNavBar extends StatelessWidget {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, -10),
-            blurRadius: 35,
-            color: kPrimaryColor.withOpacity(0.38),
+            offset: Offset(0, -1),
+            blurRadius: 10,
+            color: kPrimaryColor.withOpacity(0.5),
           ),
         ],
       ),
@@ -33,12 +35,8 @@ class MyBottomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           IconButton(
-            icon: const Icon(Icons.location_on),
-            onPressed: () {},
-          ),
-          IconButton(
             icon: const Icon(Icons.star),
-            onPressed: () => Get.to(() => const EventScreen()),
+            onPressed: () => Get.to(() => const FavoritesPage()),
           ),
           IconButton(
             icon: const Icon(Icons.home),

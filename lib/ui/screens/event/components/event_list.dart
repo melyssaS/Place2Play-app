@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:place_2_play/constans.dart';
 import 'package:place_2_play/domain/entities/event.dart';
 import 'package:place_2_play/domain/use_case/event.dart';
@@ -13,38 +14,6 @@ class EventList extends StatefulWidget {
 }
 
 class _EventListState extends State<EventList> {
-  final eventsList = [
-    EventCard(
-      image: "assets/images/baseball.jpeg",
-      title: "Juego de soccer",
-      price: "5000",
-      description: "Hey this is my event",
-    ),
-    EventCard(
-      image: "assets/images/baseball.jpeg",
-      title: "Juego de soccer",
-      price: "5000",
-      description: "Hey this is my event",
-    ),
-    EventCard(
-      image: "assets/images/baseball.jpeg",
-      title: "Juego de soccer",
-      price: "5000",
-      description: "Hey this is my event",
-    ),
-    EventCard(
-      image: "assets/images/baseball.jpeg",
-      title: "Juego de soccer",
-      price: "5000",
-      description: "Hey this is my event",
-    ),
-    EventCard(
-      image: "assets/images/baseball.jpeg",
-      title: "Juego de soccer",
-      price: "5000",
-      description: "Hey this is my event",
-    ),
-  ];
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -59,9 +28,9 @@ class _EventListState extends State<EventList> {
               return SingleChildScrollView(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [...eventsList, ...cards]));
+                      children: [...cards]));
             }
-            return Column(children: [...eventsList]);
+            return const Text('No eventos creados');
           },
         ));
   }
@@ -76,6 +45,7 @@ class _EventListState extends State<EventList> {
               event: events[index],
               price: events[index].price.toString(),
               description: events[index].description,
+              address: events[index].address,
             )).toList();
     // usersList.insert(0, SearchField());
     return eventsList;
@@ -89,12 +59,14 @@ class EventCard extends StatelessWidget {
       required this.title,
       required this.price,
       required this.description,
+      required this.address,
       this.event});
   final Event? event;
   final String image;
   final String title;
   final String price;
   final String description;
+  final LatLng address;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -122,22 +94,24 @@ class EventCard extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                   ),
                   maxLines: 2,
                 ),
-                SizedBox(height: 10),
-                FittedBox(fit: BoxFit.fitWidth, child: Text(description)),
-                Icon(Icons.location_on),
+                const SizedBox(height: 10),
+                FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(description.substring(0, 20))),
+                const Icon(Icons.location_on),
               ],
             )
           ],

@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import 'package:place_2_play/constans.dart';
 
 class TextFieldContainer extends StatelessWidget {
   const TextFieldContainer(
@@ -8,12 +7,16 @@ class TextFieldContainer extends StatelessWidget {
       required this.text,
       required this.inputColor,
       required this.textColor,
-      required this.icon});
+      required this.icon,
+      required this.keyType,
+      required this.obscureText});
 
   final String text;
   final Color inputColor, textColor;
   final IconData icon;
+  final TextInputType keyType;
   final TextEditingController? controller;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +28,7 @@ class TextFieldContainer extends StatelessWidget {
       decoration: BoxDecoration(
           color: inputColor.withOpacity(0.1),
           borderRadius: BorderRadius.circular(29)),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
             icon: Icon(
@@ -34,6 +37,14 @@ class TextFieldContainer extends StatelessWidget {
             ),
             hintText: text,
             border: InputBorder.none),
+        keyboardType: keyType,
+        obscureText: obscureText,
+        validator: (t) {
+          if (t!.isEmpty) {
+            return "You must provide ${text.toLowerCase()}";
+          }
+          return null;
+        },
       ),
     );
   }

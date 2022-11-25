@@ -16,5 +16,5 @@ class Body extends StatelessWidget {
         EventList()
       ]),
     );
-  }
+  } 
 }
