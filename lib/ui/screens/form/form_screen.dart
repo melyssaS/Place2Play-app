@@ -10,19 +10,17 @@ class FormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: kPrimaryColor,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () => Get.to(() => const HomeScreen()),
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: kPrimaryColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () => Get.to(() => const HomeScreen()),
         ),
-        body: Body(),
-        bottomNavigationBar: const MyBottomNavBar(),
       ),
+      body: Body(),
+      bottomNavigationBar: const MyBottomNavBar(),
     );
   }
 }

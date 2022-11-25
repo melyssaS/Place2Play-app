@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:place_2_play/constans.dart';
 import 'package:place_2_play/ui/screens/details/detail_screen.dart';
 
@@ -20,6 +21,7 @@ class RecomendsEvents extends StatelessWidget {
             country: "Villa Campestre",
             hora: "8:00-10:00",
             press: () {},
+            address: LatLng(11.014584, -74.823359),
           ),
           RecomendEventCard(
             image: "assets/images/baseball.jpeg",
@@ -27,13 +29,15 @@ class RecomendsEvents extends StatelessWidget {
             country: "Villa Campestre",
             hora: "8:00-10:00",
             press: () {},
+            address: LatLng(11.014584, -74.823359),
           ),
           RecomendEventCard(
             image: "assets/images/baseball.jpeg",
-            title: "Juego de soccer",
+            title: "Baseball",
             country: "Villa Campestre",
             hora: "8:00-10:00",
             press: () {},
+            address: LatLng(11.014584, -74.823359),
           ),
         ],
       ),
@@ -42,24 +46,26 @@ class RecomendsEvents extends StatelessWidget {
 }
 
 class RecomendEventCard extends StatelessWidget {
-  const RecomendEventCard({
-    Key? key,
-    required this.image,
-    required this.title,
-    required this.country,
-    required this.hora,
-    required this.press,
-  }) : super(key: key);
+  const RecomendEventCard(
+      {Key? key,
+      required this.image,
+      required this.title,
+      required this.country,
+      required this.hora,
+      required this.press,
+      required this.address})
+      : super(key: key);
 
   final String image, title, country;
   final String hora;
   final Function press;
+  final LatLng address;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      onTap: () => Get.to(() => const DetailScreen()),
+      onTap: () => Get.snackbar('Informacion', 'Juego de soccer'),
       child: Container(
         margin: const EdgeInsets.only(
           left: kDefaultPadding,
