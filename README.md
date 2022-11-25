@@ -15,4 +15,5 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 # Place2Play-app
+# UI Demo
 ![Simulator Screen Recording - iPhone SE (3rd generation) - 2022-11-11 at 10 39 38 (3)](https://user-images.githubusercontent.com/10078203/201384165-949d15c1-a64b-4ae5-a870-c09fb07f9e36.gif)
