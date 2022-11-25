@@ -2,21 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:place_2_play/constans.dart';
 
 class DescriptionEvent extends StatelessWidget {
-  const DescriptionEvent({super.key, required this.description});
+  const DescriptionEvent(
+      {super.key,
+      required this.description,
+      required this.day,
+      required this.deporte,
+      required this.hour});
   final String description;
-
+  final String day;
+  final String deporte;
+  final String hour;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: const [
+          children: [
             ImageBox(image: "assets/images/baseball.jpeg"),
             EventInformation(
-              hour: "10:00-11:00",
-              day: "18/02/2022",
-              place: "Los Caracoles",
+              hour: hour,
+              day: day,
+              place: deporte,
             )
           ],
         ),
@@ -56,12 +63,12 @@ class ImageBox extends StatelessWidget {
 }
 
 class EventInformation extends StatelessWidget {
-  const EventInformation(
+  EventInformation(
       {super.key, required this.hour, required this.day, required this.place});
 
-  final String hour;
-  final String day;
-  final String place;
+  String hour;
+  String day;
+  String place;
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +113,7 @@ class EventInformation extends StatelessWidget {
           height: 10,
         ),
         Text(
-          "Lugar",
+          "Deporte",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 15,
