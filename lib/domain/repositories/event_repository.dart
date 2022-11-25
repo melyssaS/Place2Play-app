@@ -13,6 +13,7 @@ class EventRepository {
   }
 
   Future<void> addEvent(Event event) async {
+    logInfo(await localDataSource.getAllElements());
     await localDataSource.addEvent(event);
   }
 
