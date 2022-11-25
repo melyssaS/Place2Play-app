@@ -1,6 +1,6 @@
 # place_2_play
 
-A new Flutter project.
+A Flutter project.
 
 ## Getting Started
 
