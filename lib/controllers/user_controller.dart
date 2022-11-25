@@ -4,12 +4,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:place_2_play/domain/entities/user.dart';
 import 'package:place_2_play/domain/use_case/authentication.dart';
 
+import '../domain/entities/event.dart';
+
 // the controller does not have business logic, it sends the request to the corresponding use case
 class AuthenticationController extends GetxController {
   var _logged = false.obs;
   var _storeUser = false.obs;
   var _storeUserEmail = "".obs;
   var _storeUserPassword = "".obs;
+  RxList<Event> _likedEvents = <Event>[].obs;
+  RxList<Event> filteredList = <Event>[].obs;
+  final filter = "".obs;
 
   final Authentication _authentication = Get.find<Authentication>();
 
@@ -25,6 +30,7 @@ class AuthenticationController extends GetxController {
   String get storeUserPassword => _storeUserPassword.value;
   String get storeUserEmail => _storeUserEmail.value;
   bool get storeUser => _storeUser.value;
+  List get getFavorites => _likedEvents;
 
   // it returns _logged, if it is true it calls getStoredUser
   bool get logged => _logged.value;
@@ -37,6 +43,48 @@ class AuthenticationController extends GetxController {
   // updates _logged
   set logged(bool mode) {
     _logged.value = mode;
+  }
+
+  addToFavorites(Event event) {
+    logInfo(event.title);
+    _likedEvents.add(event);
+    logInfo(_likedEvents.length);
+    filteredList.value = _likedEvents;
+    _likedEvents.refresh();
+  }
+
+  String get getFilter {
+    return filter.value;
+  }
+
+  void changeFilter(String newfilter) {
+    filter.value = newfilter;
+  }
+
+  void filterCategory(String newFilter) {
+    List<Event> copyOfProducts = List<Event>.from(_likedEvents);
+
+    if (newFilter.isEmpty || newFilter == "All") {
+      filteredList.value = copyOfProducts;
+    } else {
+      filteredList.value =
+          copyOfProducts.where((p0) => p0.deporte == newFilter).toList();
+    }
+    filteredList.refresh();
+  }
+
+  void runFilter(String enteredKeyword) {
+    List<Event> copyOfProducts = List<Event>.from(_likedEvents);
+    if (enteredKeyword.isEmpty) {
+      filteredList.value = copyOfProducts;
+    } else {
+      filteredList.value = copyOfProducts
+          .where((product) => product.title
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+    filteredList.refresh();
   }
 
   // this method should clean the user data on sharedPrefs and controller
@@ -73,8 +121,8 @@ class AuthenticationController extends GetxController {
   }
 
   // used to send signup data
-  Future<bool> signup(user, password) async {
-    await _authentication.signup(user, password);
+  Future<bool> signup(user, password, name, username, dob) async {
+    await _authentication.signup(user, password, name, username, dob);
     return true;
   }
 

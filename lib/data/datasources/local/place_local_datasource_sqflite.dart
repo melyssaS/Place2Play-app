@@ -63,8 +63,8 @@ class PlaceLocalDataSource {
       //keep in mind the index
       return Place(
         id: maps[i]['id'],
-        latLng: LatLng(double.parse(maps[i]['latitude']),
-            double.parse(maps[i]['longitude'])),
+        // latLng: LatLng(double.parse(maps[i]['latitude']),
+        //   double.parse(maps[i]['longitude'])),
         name: maps[i]['name'],
         address: maps[i]['address'],
         img: maps[i]['img'],

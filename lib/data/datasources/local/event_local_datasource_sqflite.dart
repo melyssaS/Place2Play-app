@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:loggy/loggy.dart';
 import 'package:path/path.dart';
 import 'package:place_2_play/domain/entities/event.dart';
 import 'package:sqflite/sqflite.dart';
@@ -14,13 +16,13 @@ class EventLocalDataSource {
   }
 
   _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'events_database.db');
+    String path = join(await getDatabasesPath(), 'events_databaset.db');
     return await openDatabase(path, version: 1, onCreate: _onCreate);
   }
 
   Future _onCreate(Database db, int version) async {
     await db.execute(
-        'CREATE TABLE events (id TEXT PRIMARY KEY, title TEXT, description TEXT, start TEXT, end TEXT, category TEXT, price TEXT)');
+        'CREATE TABLE events (id TEXT PRIMARY KEY, title TEXT, description TEXT, start TEXT, end TEXT, category TEXT, price TEXT, latitude TEXT, longitude TEXT, deporte TEXT)');
 
     //addAllEvents(eventsList);
   }
@@ -36,6 +38,12 @@ class EventLocalDataSource {
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     });
+  }
+
+  Future<int> getAllElements() async {
+    final db = await database;
+    return Future.value(Sqflite.firstIntValue(
+        await db.rawQuery('SELECT COUNT(*) FROM events')));
   }
 
   Future<void> addEvent(Event event) async {
@@ -72,7 +80,9 @@ class EventLocalDataSource {
           title: maps[i]['title'],
           price: maps[i]['price'],
           description: maps[i]['description'],
-          category: maps[i]['category']);
+          category: maps[i]['category'],
+          address: maps[i]['latitude']['longitude'],
+          deporte: maps[i]['deporte']);
     });
   }
 
@@ -93,7 +103,10 @@ class EventLocalDataSource {
               ? UserCategory.history
               : maps[i]['category'].contains('created')
                   ? UserCategory.created
-                  : UserCategory.starred);
+                  : UserCategory.starred,
+          address: LatLng(double.parse(maps[i]['latitude']),
+              double.parse(maps[i]['longitude'])),
+          deporte: maps[i]['deporte']);
     });
   }
 
@@ -111,7 +124,9 @@ class EventLocalDataSource {
         title: maps[0]['title'],
         price: maps[0]['price'],
         description: maps[0]['description'],
-        category: maps[0]['category']);
+        category: maps[0]['category'],
+        address: maps[0]['latitude']['longitude'],
+        deporte: maps[0]['deporte']);
   }
 
   Future<void> deleteAll() async {

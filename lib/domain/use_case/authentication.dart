@@ -19,8 +19,8 @@ class Authentication {
     // return existUser;
   }
 
-  Future<void> signup(user, password) async {
-    await repository.signup(user, password);
+  Future<void> signup(email, password,name,username,dob) async {
+    await repository.signup(email, password,name,username,dob);
   }
 
   Future<void> logout() async {

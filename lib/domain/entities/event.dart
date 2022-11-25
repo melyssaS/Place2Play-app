@@ -1,3 +1,5 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class Event {
   final String title;
   final String description;
@@ -6,6 +8,8 @@ class Event {
   final String? id;
   final double price;
   final UserCategory category;
+  final LatLng address;
+  final String deporte;
 
   const Event(
       {required this.title,
@@ -14,7 +18,9 @@ class Event {
       required this.end,
       required this.price,
       this.id,
-      required this.category});
+      required this.category,
+      required this.address,
+      required this.deporte});
 
   Map<String, dynamic> toMap() {
     return {
@@ -24,7 +30,10 @@ class Event {
       'start': start.toString(),
       'end': end.toString(),
       'price': price.toString(),
-      'category': category.toString()
+      'category': category.toString(),
+      'latitude': address.latitude,
+      'longitude': address.longitude,
+      'deporte' : deporte
     };
   }
 }
